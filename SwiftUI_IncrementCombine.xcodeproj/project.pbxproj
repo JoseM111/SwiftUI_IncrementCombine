@@ -11,6 +11,8 @@
 		AB9735C0259B6ADA00C269AA /* DropDownSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735BF259B6ADA00C269AA /* DropDownSubView.swift */; };
 		AB9735CE259B6E5D00C269AA /* ExtLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */; };
 		AB9735E5259B7A7F00C269AA /* RemindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735E4259B7A7F00C269AA /* RemindView.swift */; };
+		AB973606259BA44A00C269AA /* CreateChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */; };
+		AB97360F259BA55500C269AA /* DropdownItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB97360E259BA55500C269AA /* DropdownItemProtocol.swift */; };
 		ABA57F49259A77B9006D378C /* SwiftUI_IncrementCombineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA57F48259A77B9006D378C /* SwiftUI_IncrementCombineApp.swift */; };
 		ABA57F4B259A77B9006D378C /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA57F4A259A77B9006D378C /* LandingView.swift */; };
 		ABA57F4D259A77BB006D378C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA57F4C259A77BB006D378C /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		AB9735BF259B6ADA00C269AA /* DropDownSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSubView.swift; sourceTree = "<group>"; };
 		AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtLandingView.swift; sourceTree = "<group>"; };
 		AB9735E4259B7A7F00C269AA /* RemindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindView.swift; sourceTree = "<group>"; };
+		AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewModel.swift; sourceTree = "<group>"; };
+		AB97360E259BA55500C269AA /* DropdownItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemProtocol.swift; sourceTree = "<group>"; };
 		ABA57F45259A77B9006D378C /* SwiftUI_IncrementCombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_IncrementCombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA57F48259A77B9006D378C /* SwiftUI_IncrementCombineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_IncrementCombineApp.swift; sourceTree = "<group>"; };
 		ABA57F4A259A77B9006D378C /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 				AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */,
 			);
 			path = "LandingView+Extensions";
+			sourceTree = "<group>";
+		};
+		AB97360D259BA54B00C269AA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AB97360E259BA55500C269AA /* DropdownItemProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		ABA57F3C259A77B9006D378C = {
@@ -180,6 +192,8 @@
 		ABA57F90259A87F9006D378C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AB97360D259BA54B00C269AA /* Protocols */,
+				AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -358,6 +372,7 @@
 				ABA57F86259A7811006D378C /* LibModifiers.swift in Sources */,
 				ABF38794259AB8E4007BD544 /* ModifierStructHelpers.swift in Sources */,
 				AB9735C0259B6ADA00C269AA /* DropDownSubView.swift in Sources */,
+				AB97360F259BA55500C269AA /* DropdownItemProtocol.swift in Sources */,
 				AB9735CE259B6E5D00C269AA /* ExtLandingView.swift in Sources */,
 				ABA57F81259A77F3006D378C /* LibTools2.swift in Sources */,
 				ABA57F4B259A77B9006D378C /* LandingView.swift in Sources */,
@@ -365,6 +380,7 @@
 				ABA57F79259A77DD006D378C /* LibTools.swift in Sources */,
 				ABA57F49259A77B9006D378C /* SwiftUI_IncrementCombineApp.swift in Sources */,
 				AB9735E5259B7A7F00C269AA /* RemindView.swift in Sources */,
+				AB973606259BA44A00C269AA /* CreateChallengeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

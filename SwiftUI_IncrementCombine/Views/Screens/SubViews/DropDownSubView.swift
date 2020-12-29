@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct DropDownSubView: View {
+struct DropDownSubView<T: DropdownItemProtocol>: View {
     // MARK: - ™PROPERTIES™
     ///™«««««««««««««««««««««««««««««««««««
-    
+    @Binding var createChallengeVM: T
     //™•••••••••••••••••••••••••••••••••••«
     let darkPrimaryGray = Color.darkPrimaryGray.opacity(0.35)
     let whiteOpacity = Color.white.opacity(0.6)
@@ -19,7 +19,7 @@ struct DropDownSubView: View {
             
             HStack {
                 
-                Text("Exercise")
+                Text(createChallengeVM.headerTitle)
                     .modifier(TextShadowModifier(
                                 systemFontSize: 22,
                                 systemFontWeight: .semibold,
@@ -36,11 +36,11 @@ struct DropDownSubView: View {
             
             // MARK: -∆  Dropdown-Button(Pushups)  '''''''''''''''''''''
             
-            Button(action: {  }) {
+            Button(action: { createChallengeVM.isSelected = true }) {
                 //∆..... LABEL .....
                 HStack {
                     
-                    Text("Pushups")
+                    Text(createChallengeVM.dropdownTitle)
 
                     ///ººº..................................•••
                     Spacer(minLength: 0) // Spaced Horizontally
@@ -71,16 +71,16 @@ struct DropDownSubView: View {
 /// ™•••••••••••••••••••••••••••• ([ Preview ]) ••••••••••••••••••••••••••••™
 
 // MARK: - Preview
-struct DropDownSubView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        
-        DropDownSubView()//.padding(.all, 100)
-        .preferredColorScheme(.dark)
-        //.previewLayout(.sizeThatFits)
-        //.previewLayout(.fixed(width: 360, height: 720))
-        // The preview below is for like a card
-        .previewLayout(.fixed(width: 440, height: 170))
-    }
-}
+//struct DropDownSubView_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//
+//        DropDownSubView()//.padding(.all, 100)
+//        .preferredColorScheme(.dark)
+//        //.previewLayout(.sizeThatFits)
+//        //.previewLayout(.fixed(width: 360, height: 720))
+//        // The preview below is for like a card
+//        .previewLayout(.fixed(width: 440, height: 170))
+//    }
+//}
 /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••

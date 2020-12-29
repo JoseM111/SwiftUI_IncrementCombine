@@ -3,9 +3,17 @@ import SwiftUI
 struct CreateView: View {
     // MARK: - ™PROPERTIES™
     ///™«««««««««««««««««««««««««««««««««««
+    /// ™ It is a `@StateObject` becuase this view owns it when it creates it
+    @StateObject var createChallengeVM = CreateChallengeViewModel()
     @State var isActive: Bool = false
     //™•••••••••••••••••••••••••••••••••••«
-    
+    var dropdownListForEachComponent: some View {
+        //∆..........
+        ForEach(createChallengeVM.dropdowns.indices, id: \.self) { index in
+            //∆..........
+            DropDownSubView(createChallengeVM: $createChallengeVM.dropdowns[index])
+        }
+    }
     ///™«««««««««««««««««««««««««««««««««««
     
     // MARK: -∆ Initializer
@@ -26,17 +34,11 @@ struct CreateView: View {
             VStack(alignment: .center, spacing: nil, content: {
                 
                 ///ººº..................................•••
-                Spacer(minLength: 170) // Spaced Vertically
+                Spacer(minLength: 200) // Spaced Vertically
                 ///ººº..................................•••
                 
-                DropDownSubView()
-                DropDownSubView()
-                DropDownSubView()
-                DropDownSubView()
-                
-                ///ººº..................................•••
-                Spacer() // Spaced Vertically
-                ///ººº..................................•••
+                // MARK: -∆  dropdownListForEachComponent  '''''''''''''''''''''
+                dropdownListForEachComponent
                 
                 // MARK: -∆  Button(Next) To Dismiss View  '''''''''''''''''''''
                 NavigationLink(destination: RemindView(), isActive: $isActive) {
