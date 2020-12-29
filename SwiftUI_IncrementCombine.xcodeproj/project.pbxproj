@@ -88,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB9735F5259B933A00C269AA /* LandingView+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ABA57F4A259A77B9006D378C /* LandingView.swift */,
+				AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */,
+			);
+			path = "LandingView+Extensions";
+			sourceTree = "<group>";
+		};
 		ABA57F3C259A77B9006D378C = {
 			isa = PBXGroup;
 			children = (
@@ -194,8 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				ABA57F48259A77B9006D378C /* SwiftUI_IncrementCombineApp.swift */,
-				ABA57F4A259A77B9006D378C /* LandingView.swift */,
-				AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */,
+				AB9735F5259B933A00C269AA /* LandingView+Extensions */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -203,9 +211,9 @@
 		ABA57F94259A8818006D378C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				ABA57F95259A8828006D378C /* SubViews */,
 				AB9735B7259B60E000C269AA /* CreateView.swift */,
 				AB9735E4259B7A7F00C269AA /* RemindView.swift */,
+				ABA57F95259A8828006D378C /* SubViews */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

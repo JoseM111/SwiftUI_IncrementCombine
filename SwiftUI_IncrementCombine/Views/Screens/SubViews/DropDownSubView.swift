@@ -23,7 +23,7 @@ struct DropDownSubView: View {
                     .modifier(TextShadowModifier(
                                 systemFontSize: 22,
                                 systemFontWeight: .semibold,
-                                fgColor: .primary, shadowColor: Color.primary.opacity(0.35),
+                                fgColor: .white, shadowColor: Color.primary.opacity(0.35),
                                 shadow_Radius_AxisPoint: 3,
                                 shadow_X_AxisPoint: 3,
                                 shadow_Y_AxisPoint: 4.5))
@@ -80,7 +80,7 @@ struct DropDownSubView_Previews: PreviewProvider {
         //.previewLayout(.sizeThatFits)
         //.previewLayout(.fixed(width: 360, height: 720))
         // The preview below is for like a card
-        //.previewLayout(.fixed(width: 440, height: 270))
+        .previewLayout(.fixed(width: 440, height: 170))
     }
 }
 /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
