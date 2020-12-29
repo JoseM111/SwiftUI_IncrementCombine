@@ -3,7 +3,7 @@ import SwiftUI
 struct LandingView: View {
     // MARK: - ™PROPERTIES™
     ///™«««««««««««««««««««««««««««««««««««
-    @State private var isShowingButton: Bool = false
+    @State var isActive: Bool = false
     //™•••••••••••••••••••••••••••••••••••«
     let pctFromTop: CGFloat = 0.35// or 25%
     let darkPrimaryGray = Color.darkPrimaryGray.opacity(0.35)
@@ -39,22 +39,25 @@ struct LandingView: View {
                     Spacer(minLength: 0) // Spaced Vertically to fill remaining space
                     ///ººº..................................•••
                     
-                    // MARK: -∆  Button(Create A Challenge)  '''''''''''''''''''''
-                    createChallengeBtnComponent
-                    // ∆ END OF: Buutton
-                    .modifier(SuperShadowBtnStyleModifier(bgColor: darkPrimaryGray))
-                    .padding(.bottom, 35)
-                    
+                    // MARK: -∆  Button(Create A Challenge) * NavigationLink '''''''''''''
+                    NavigationLink(destination: CreateView(), isActive: $isActive) {
+                        //∆..........
+                        createChallengeBtnComponent
+                        // ∆ END OF: Buutton
+                    }
+                    // ∆ END OF: NavigationLink
+
                 })
                 // ∆ END OF: VStack
-                .modifier(VStackImageFullScreenModifier())
+                .modifier(VStackImageFullScreenModifier(imageName: "in-shape"))
+                
                 //∆ HANGER ™👕™ .................
             }
             // ∆ END OF: GeometryReader
         }
         // MARK: ||END__PARENT-NavigationView||
+        .accentColor(.primary)
         //.............................
-        
     }
     // MARK: |||END OF: body|||
     
@@ -75,48 +78,7 @@ func iAmHere(myStr: String) -> some View {
 }
 
 /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-// MARK: -∆  EXTENSION OF: [( LandingView )] •••••••••
 
-extension LandingView {
-    
-    // MARK: @------- [Computed some-View Properties] -------
-    
-    // ™ œœœœœ[ createChallengeBtnComponent ]œœœœœœœœœœœœœœœ
-    var createChallengeBtnComponent: some View {
-        //∆..........
-        Button(action: {
-            //∆..........
-            isShowingButton.toggle()
-        }) {
-            //∆..... LABEL .....
-            HStack {
-                
-                Image(systemName: isShowingButton == true
-                        ? "airpodpro.right" : "plus.circle")
-                    .font(.system(size: 24, weight: .heavy))
-                    .foregroundColor(whiteOpacity)
-                    .modifier(SuperShadowBtnStyleModifier(
-                                bgColor: whiteOpacity))
-                    .animation(.easeIn(duration: 0.45))
-                
-                Text(isShowingButton == true ? "Adding..." : "Create a challenge")
-                    .font(.system(size: 22, weight: .semibold))
-                    .modifier(SuperShadowBtnStyleModifier(
-                                bgColor: whiteOpacity))
-                    .animation(.easeOut(duration: 0.35))
-            }
-            .frame(width: 345, height: 50)
-
-        }
-        // ∆ END OF: Buutton
-        .modifier(SuperShadowBtnStyleModifier(bgColor: darkPrimaryGray))
-        .padding(.bottom, 35)
-    }
-    /// ∆ END OF: createChallengeBtnComponent
-}
-// MARK: END OF: LandingView
-
-/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
 /// ™•••••••••••••••••••••••••••• ([ Preview ]) ••••••••••••••••••••••••••••™
 
@@ -126,7 +88,7 @@ struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
         
         LandingView()//.padding(.all, 100)
-        //.preferredColorScheme(.dark)
+        .preferredColorScheme(.dark)
         //.previewLayout(.sizeThatFits)
         //.previewLayout(.fixed(width: 360, height: 720))
         // The preview below is for like a card

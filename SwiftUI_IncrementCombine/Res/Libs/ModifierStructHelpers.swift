@@ -3,6 +3,11 @@ import SwiftUI
 import SwiftUI
 
 struct VStackImageFullScreenModifier: ViewModifier {
+    // MARK: - ™PROPERTIES™
+    ///™«««««««««««««««««««««««««««««««««««
+    let imageName: String
+    ///™«««««««««««««««««««««««««««««««««««
+    
     // MARK: - ™CONFORMS TO PROTOCOL™
     func body(content: Content) -> some View {
         //∆..........
@@ -14,7 +19,7 @@ struct VStackImageFullScreenModifier: ViewModifier {
             .shadow(color: Color.black.opacity(0.6), radius: 2, x: 2, y: 4)
             .background(
                 //∆..........
-                Image("in-shape")
+                Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             )
