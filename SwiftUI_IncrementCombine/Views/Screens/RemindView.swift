@@ -14,9 +14,6 @@ struct RemindView: View {
         //∆..........
         UINavigationBar.appearance()
             .largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        
-        
     }
     ///∆.................................
     
@@ -32,11 +29,11 @@ struct RemindView: View {
                 ///ººº..................................•••
                 Spacer(minLength: 300) // Spaced Vertically
                 ///ººº..................................•••
-                
-                DropDownSubView()
-                
+
+//                DropDownSubView()
+//
                 ///ººº..................................•••
-                Spacer(minLength: 300) // Spaced Vertically÷
+                Spacer(minLength: 300) // Spaced Vertically
                 ///ººº..................................•••
                 
                 VStack {
