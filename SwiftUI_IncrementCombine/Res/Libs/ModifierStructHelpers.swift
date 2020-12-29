@@ -47,7 +47,6 @@ struct SuperShadowBtnStyleModifier: ViewModifier {
                             paddingAll: 12, bgColorAlt: .clear,
                             bgColor: bgColor, w: 280, h: 80)
             )
-            .animation(.easeInOut(duration: 0.45))
     }
 }
 // MARK: END OF: SuperShadowBtnStyleModifier

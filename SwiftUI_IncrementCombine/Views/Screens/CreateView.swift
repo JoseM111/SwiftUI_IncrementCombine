@@ -8,6 +8,15 @@ struct CreateView: View {
     
     ///™«««««««««««««««««««««««««««««««««««
     
+    // MARK: -∆ Initializer
+    ///∆.................................
+    init() {
+        //∆..........
+        UINavigationBar.appearance()
+            .largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    ///∆.................................
+    
     
     var body: some View {
         
@@ -17,7 +26,7 @@ struct CreateView: View {
             VStack(alignment: .center, spacing: nil, content: {
                 
                 ///ººº..................................•••
-                Spacer(minLength: 120) // Spaced Vertically
+                Spacer(minLength: 170) // Spaced Vertically
                 ///ººº..................................•••
                 
                 DropDownSubView()
@@ -30,7 +39,7 @@ struct CreateView: View {
                 ///ººº..................................•••
                 
                 // MARK: -∆  Button(Next) To Dismiss View  '''''''''''''''''''''
-                NavigationLink(destination: Text("RemindView"), isActive: $isActive) {
+                NavigationLink(destination: RemindView(), isActive: $isActive) {
                         
                     Button(action: { isActive.toggle() }) {
                         //∆..... LABEL .....
@@ -38,7 +47,7 @@ struct CreateView: View {
                             .modifier(TextShadowModifier(
                                         systemFontSize: 22,
                                         systemFontWeight: .semibold,
-                                        fgColor: .primary, shadowColor: Color.primary.opacity(0.35),
+                                        fgColor: .white, shadowColor: Color.primary.opacity(0.35),
                                         shadow_Radius_AxisPoint: 3,
                                         shadow_X_AxisPoint: 4,
                                         shadow_Y_AxisPoint: 5.5))
@@ -52,7 +61,6 @@ struct CreateView: View {
             })
             // ∆ END OF: VStack
             .navigationBarTitle("Create")
-            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
         }
         // MARK: ||END__PARENT-ScrollView||
@@ -77,7 +85,7 @@ struct CreateView_Previews: PreviewProvider {
             CreateView()
         }
         //.padding(.all, 100)
-        .preferredColorScheme(.dark)
+        //.preferredColorScheme(.dark)
         //.previewLayout(.sizeThatFits)
         //.previewLayout(.fixed(width: 360, height: 720))
         // The preview below is for like a card

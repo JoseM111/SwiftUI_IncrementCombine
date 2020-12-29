@@ -56,7 +56,7 @@ struct LandingView: View {
             // ∆ END OF: GeometryReader
         }
         // MARK: ||END__PARENT-NavigationView||
-        .accentColor(.primary)
+        .accentColor(.white)
         //.............................
     }
     // MARK: |||END OF: body|||
