@@ -97,14 +97,16 @@ extension LandingView {
                     .foregroundColor(whiteOpacity)
                     .modifier(SuperShadowBtnStyleModifier(
                                 bgColor: whiteOpacity))
+                    .animation(.easeIn(duration: 0.45))
                 
                 Text(isShowingButton == true ? "Adding..." : "Create a challenge")
                     .font(.system(size: 22, weight: .semibold))
                     .modifier(SuperShadowBtnStyleModifier(
                                 bgColor: whiteOpacity))
+                    .animation(.easeOut(duration: 0.35))
             }
             .frame(width: 345, height: 50)
-            .animation(.easeInOut(duration: 0.45))
+
         }
         // ∆ END OF: Buutton
         .modifier(SuperShadowBtnStyleModifier(bgColor: darkPrimaryGray))
