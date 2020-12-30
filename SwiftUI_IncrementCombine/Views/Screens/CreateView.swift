@@ -14,6 +14,23 @@ struct CreateView: View {
             DropDownSubView(createChallengeVM: $createChallengeVM.dropdowns[index])
         }
     }
+    
+    /// ™ actionSheetSelected ----------
+    var actionSheetSelected: ActionSheet {
+        //∆..........
+        ActionSheet(
+            title: Text("Select"),
+            buttons: createChallengeVM.displayOption.indices.map { index in
+                //∆..........
+                let option = createChallengeVM.displayOption[index]
+                //∆..........
+                return .default(Text(option.formatted)) {
+                    ///∆ Select `option` at `index`
+                    createChallengeVM.send(action: .selectOption(index: index))
+                }
+            })
+    }
+    /// ∆ END OF: actionSheetSelected ----
     ///™«««««««««««««««««««««««««««««««««««
     
     // MARK: -∆ Initializer
@@ -62,8 +79,23 @@ struct CreateView: View {
                 // ∆ END OF: NavigationLink
             })
             // ∆ END OF: VStack
+            // MARK: - actionSheet
+            ///™™|............................................
+            .actionSheet(
+                isPresented: Binding<Bool>(
+                    get: {
+                        //∆..........
+                        createChallengeVM.selectedDropdown
+                        //∆..........
+                    },
+                    set: { _ in })
+            ) {
+                actionSheetSelected
+            }
+            ///™™|............................................
             .navigationBarTitle("Create")
             .navigationBarBackButtonHidden(true)
+            //∆ HANGER ™👕™ .................
         }
         // MARK: ||END__PARENT-ScrollView||
         .modifier(VStackImageFullScreenModifier(imageName: "increment-app-bg"))

@@ -14,6 +14,86 @@ final class CreateChallengeViewModel: ObservableObject {
         //∆..........
     ]
     ///™«««««««««««««««««««««««««««««««««««
+    
+    // MARK: -∆  Computed-Property  '''''''''''''''''''''
+    
+    /// ™ selectedDropdown ----------
+    var selectedDropdown: Bool {
+        //∆..........
+        selectedDropdownIndex != nil
+    }
+    // ∆ END OF: selectedDropdown
+    
+    /// ™ selectedDropdownIndex ----------
+    var selectedDropdownIndex: Int? {
+        //∆..........
+        dropdowns.enumerated().first(where: { $0.element.isSelected })?.offset
+    }
+    /// ∆ END OF: selectedDropdownIndex
+    
+    /// ™ displayOption ----------
+    var displayOption: [DropdownOption] {
+        //∆..........
+        guard let selected = selectedDropdownIndex else { return [] }
+        return dropdowns[selected].options
+    }
+    /// ∆ END OF: displayOption
+    
+    /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+    /// ™ Action ----------
+    enum Action {
+        // MARK: - ™CASES™
+        ///™«««««««««««««««««««««««««««««««««««
+        case selectOption(index: Int)
+        ///™«««««««««««««««««««««««««««««««««««
+    }
+    // MARK: END OF ENUM: Action
+    
+    /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+    
+    ///∆ ........... Helper Methods ...........
+    
+    /// ™ send ----------
+    func send(action: Action) -> Void {
+        //∆..........
+        switch action {
+        //∆..........
+        case .selectOption(index: let index):
+            //∆..........
+            guard let selected = selectedDropdownIndex else { return }
+            // Sets back to false: Clears th selected option
+            clearSelectedOption()
+            
+            dropdowns[selected].options[index].isSelected = true
+            // Sets back to false: Clears the drop down
+            clearSelectedDropdown()
+        }
+        // ∆ END OF: switch
+    }
+    /// ∆ END OF: send ---
+    
+    /// ™ clearSelectedOptions ----------
+    func clearSelectedOption() -> Void {
+        //∆..........
+        guard let selected = selectedDropdownIndex else { return }
+        dropdowns[selected].options.indices.forEach { index in
+            //∆..........
+            dropdowns[selected].options[index].isSelected = false
+        }
+        // ∆ END OF: end of closure.
+    }
+    /// ∆ END OF: clearSelectedOptions ---
+    
+    /// ™ clearSelectedDropdown ----------
+    func clearSelectedDropdown() -> Void {
+        //∆..........
+        guard let selected = selectedDropdownIndex else { return }
+        //∆..........
+        dropdowns[selected].isSelected = false
+    }
+    /// ∆ END OF: clearSelectedDropdown ---
+    
 }
 // MARK: END OF: CreateChallengeViewModel
 
@@ -30,47 +110,52 @@ extension CreateChallengeViewModel {
         // MARK: - ™PROTOCOL-PROPERTIES™
         ///™«««««««««««««««««««««««««««««««««««
         var options: [DropdownOption]
+        var isSelected: Bool = false
+        private var type: ChallengePartType
+        ///™«««««««««««««««««««««««««««««««««««
+        
+        // MARK: -∆  Computed-Property  '''''''''''''''''''''
+        
+        /// ™ headerTitle ----------
         var headerTitle: String {
             //∆..........
             /// The header title will be driven by the enums raw values
             type.rawValue
         }
+        /// ∆ END OF: headerTitle
         
+        /// ™ dropdownTitle ----------
         var dropdownTitle: String {
             //∆..........
             /// Looks through the selected options & displays
             /// the formmated value of the option selected
             options.first(where: { $0.isSelected })?.formatted ?? ""
         }
+        /// ∆ END OF: dropdownTitle
         
-        var isSelected: Bool = false
-        private var type: ChallengePartType
-        ///™«««««««««««««««««««««««««««««««««««
-        
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
         // MARK: -∆ Initializer Injecting our ChallengePartType
         ///∆.................................
         init(type: ChallengePartType) {
             //∆..........
             switch type {
                 //∆..........
-            case .exercise:
-                self.options = ExcerciseOption.allCases.map { $0.toDropdownOption }
+            case .exercise: self.options = ExcerciseOption.allCases.map { $0.toDropdownOption }
                 //∆..........
-            case .startAmount:
-                self.options = StartAmount.allCases.map { $0.toDropdownOption }
+            case .startAmount: self.options = StartAmount.allCases.map { $0.toDropdownOption }
                 //∆..........
-            case .increase:
-                self.options = IncreaseAmount.allCases.map { $0.toDropdownOption }
+            case .increase: self.options = IncreaseAmount.allCases.map { $0.toDropdownOption }
                 //∆..........
-            case .length:
-                self.options = LengthAmount.allCases.map { $0.toDropdownOption }
+            case .length: self.options = LengthAmount.allCases.map { $0.toDropdownOption }
                 //∆..........
             }
             
             self.type = type
         }
         ///∆.................................
-        //∆.....................................................
+        
+        /// ™ ChallengePartType ----------
         enum ChallengePartType: String, CaseIterable {
             // MARK: - ™CASES™
             ///™«««««««««««««««««««««««««««««««««««
@@ -81,8 +166,10 @@ extension CreateChallengeViewModel {
             ///™«««««««««««««««««««««««««««««««««««
         }
         // MARK: END OF ENUM: ChallengePartType
-        //∆.....................................................
         
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+        /// ™ ExcerciseOption ----------
         enum ExcerciseOption: String, CaseIterable, DropdownOptionProtocol {
             // MARK: - ™CASES™
             ///™«««««««««««««««««««««««««««««««««««
@@ -91,67 +178,79 @@ extension CreateChallengeViewModel {
             case situps
             ///™«««««««««««««««««««««««««««««««««««
             
+            /// ™ toDropdownOption ----------
             var toDropdownOption: DropdownOption {
                 //∆..........
                 .init(type: .text(rawValue),
                       formatted: rawValue.capitalized,
                       isSelected: self == .pullups)
             }
-            // ∆ END OF: toDropdownOption
+            /// ∆ END OF: toDropdownOption ----
         }
         // MARK: END OF ENUM: ExcerciseOption
-        //∆.....................................................
         
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        
+        /// ™ StartAmount ----------
         enum StartAmount: Int, CaseIterable, DropdownOptionProtocol {
             // MARK: - ™CASES™
             ///™«««««««««««««««««««««««««««««««««««
             case one = 1, two, three, four, five
             ///™«««««««««««««««««««««««««««««««««««
             
+            /// ™ toDropdownOption ----------
             var toDropdownOption: DropdownOption {
                 //∆..........
                 .init(type: .number(rawValue),
                       formatted: "\(rawValue)",
                       isSelected: self == .one)
             }
-            // ∆ END OF: toDropdownOption
+            /// ∆ END OF: toDropdownOption ----
         }
         // MARK: END OF ENUM: StartAmount
-        //∆.....................................................
         
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        
+        /// ™ IncreaseAmount ----------
         enum IncreaseAmount: Int, CaseIterable, DropdownOptionProtocol {
             // MARK: - ™CASES™
             ///™«««««««««««««««««««««««««««««««««««
             case one = 1, two, three, four, five
             ///™«««««««««««««««««««««««««««««««««««
             
+            
+            /// ™ toDropdownOption ----------
             var toDropdownOption: DropdownOption {
                 //∆..........
                 .init(type: .number(rawValue),
                       formatted: "+\(rawValue)",
                       isSelected: self == .one)
             }
-            // ∆ END OF: toDropdownOption
+            /// ∆ END OF: toDropdownOption ----
         }
         // MARK: END OF ENUM: IncreaseAmount
-        //∆.....................................................
         
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        
+        /// ™ LengthAmount ----------
         enum LengthAmount: Int, CaseIterable, DropdownOptionProtocol {
             // MARK: - ™CASES™
             ///™«««««««««««««««««««««««««««««««««««
             case seven = 7, fourteen = 14, twentyOne = 21, twentyEight = 28
             ///™«««««««««««««««««««««««««««««««««««
             
+            /// ™ toDropdownOption ----------
             var toDropdownOption: DropdownOption {
                 //∆..........
                 .init(type: .number(rawValue),
                       formatted: "\(rawValue) days",
                       isSelected: self == .seven)
             }
-            // ∆ END OF: toDropdownOption
+            /// ∆ END OF: toDropdownOption ----
         }
         // MARK: END OF ENUM: LengthAmount
-        //∆.....................................................
+        
+        /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
     }
     // MARK: END OF: ChallengePartViewModel
 }

@@ -192,8 +192,8 @@
 		ABA57F90259A87F9006D378C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AB97360D259BA54B00C269AA /* Protocols */,
 				AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */,
+				AB97360D259BA54B00C269AA /* Protocols */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
