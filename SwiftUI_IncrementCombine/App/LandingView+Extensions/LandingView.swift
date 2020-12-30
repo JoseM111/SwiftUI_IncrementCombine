@@ -5,7 +5,7 @@ struct LandingView: View {
     ///™«««««««««««««««««««««««««««««««««««
     @State var isActive: Bool = false
     //™•••••••••••••••••••••••••••••••••••«
-    let pctFromTop: CGFloat = 0.35// or 25%
+    let pctFromTop: CGFloat = 0.25// or 25%
     let darkPrimaryGray = Color.darkPrimaryGray.opacity(0.35)
     let whiteOpacity = Color.white.opacity(0.6)
     ///™«««««««««««««««««««««««««««««««««««
@@ -28,7 +28,7 @@ struct LandingView: View {
                     // MARK: -∆  Text(Increment) '''''''''''''''''''''
                     Text("Increment")
                         .modifier(TextShadowModifier(
-                                    systemFontSize: 64,
+                                    systemFontSize: 54,
                                     systemFontWeight: .medium,
                                     fgColor: .white, shadowColor: .black,
                                     shadow_Radius_AxisPoint: 3,
