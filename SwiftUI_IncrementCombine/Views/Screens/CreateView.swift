@@ -5,7 +5,6 @@ struct CreateView: View {
     ///™«««««««««««««««««««««««««««««««««««
     /// ™ It is a `@StateObject` becuase this view owns it when it creates it
     @StateObject var createChallengeVM = CreateChallengeViewModel()
-    @State var isActive: Bool = false
     //™•••••••••••••••••••••••••••••••••••«
     var dropdownListForEachComponent: some View {
         //∆..........
@@ -58,25 +57,26 @@ struct CreateView: View {
                 dropdownListForEachComponent
                 
                 // MARK: -∆  Button(Next) To Dismiss View  '''''''''''''''''''''
-                NavigationLink(destination: RemindView(), isActive: $isActive) {
-                        
-                    Button(action: { isActive.toggle() }) {
-                        //∆..... LABEL .....
-                        Text("Next")
-                            .modifier(TextShadowModifier(
-                                        systemFontSize: 22,
-                                        systemFontWeight: .semibold,
-                                        fgColor: .white, shadowColor: Color.primary.opacity(0.35),
-                                        shadow_Radius_AxisPoint: 3,
-                                        shadow_X_AxisPoint: 4,
-                                        shadow_Y_AxisPoint: 5.5))
-                        
-                    }
-                    // ∆ END OF: Button
-                    .padding(.top, 10)
-                    //∆ HANGER ™👕™ .................
+                
+                Button(action: {
+                    //∆..........
+                    createChallengeVM.send(action: .createChallenge)
+                    
+                }) {
+                    //∆..... LABEL .....
+                    Text("Create")
+                        .modifier(TextShadowModifier(
+                                    systemFontSize: 22,
+                                    systemFontWeight: .semibold,
+                                    fgColor: .white, shadowColor: Color.primary.opacity(0.35),
+                                    shadow_Radius_AxisPoint: 3,
+                                    shadow_X_AxisPoint: 4,
+                                    shadow_Y_AxisPoint: 5.5))
+                    
                 }
-                // ∆ END OF: NavigationLink
+                // ∆ END OF: Button
+                .padding(.top, 10)
+                //∆ HANGER ™👕™ .................
             })
             // ∆ END OF: VStack
             // MARK: - actionSheet
