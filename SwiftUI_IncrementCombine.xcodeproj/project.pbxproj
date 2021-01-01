@@ -10,9 +10,11 @@
 		AB5CEF5B259D5E2600CE6331 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB5CEF5A259D5E2600CE6331 /* FirebaseAuth */; };
 		AB5CEF5D259D5E2600CE6331 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AB5CEF5C259D5E2600CE6331 /* FirebaseFirestore */; };
 		AB5CEF5F259D5E2600CE6331 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AB5CEF5E259D5E2600CE6331 /* FirebaseFirestoreSwift-Beta */; };
+		AB8A6A25259F58C5007380B2 /* Ext_CreateChallengeViewModelHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8A6A24259F58C5007380B2 /* Ext_CreateChallengeViewModelHelpers.swift */; };
+		AB8A6A3A259F5C8B007380B2 /* Ext_CreateChallengeExerciseOptionsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8A6A39259F5C8B007380B2 /* Ext_CreateChallengeExerciseOptionsEnums.swift */; };
 		AB9735B8259B60E000C269AA /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735B7259B60E000C269AA /* CreateView.swift */; };
 		AB9735C0259B6ADA00C269AA /* DropDownSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735BF259B6ADA00C269AA /* DropDownSubView.swift */; };
-		AB9735CE259B6E5D00C269AA /* ExtLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */; };
+		AB9735CE259B6E5D00C269AA /* Ext_LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735CD259B6E5D00C269AA /* Ext_LandingView.swift */; };
 		AB9735E5259B7A7F00C269AA /* RemindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9735E4259B7A7F00C269AA /* RemindView.swift */; };
 		AB973606259BA44A00C269AA /* CreateChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */; };
 		AB97360F259BA55500C269AA /* DropdownItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB97360E259BA55500C269AA /* DropdownItemProtocol.swift */; };
@@ -48,9 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB8A6A24259F58C5007380B2 /* Ext_CreateChallengeViewModelHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext_CreateChallengeViewModelHelpers.swift; sourceTree = "<group>"; };
+		AB8A6A39259F5C8B007380B2 /* Ext_CreateChallengeExerciseOptionsEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext_CreateChallengeExerciseOptionsEnums.swift; sourceTree = "<group>"; };
 		AB9735B7259B60E000C269AA /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		AB9735BF259B6ADA00C269AA /* DropDownSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSubView.swift; sourceTree = "<group>"; };
-		AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtLandingView.swift; sourceTree = "<group>"; };
+		AB9735CD259B6E5D00C269AA /* Ext_LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext_LandingView.swift; sourceTree = "<group>"; };
 		AB9735E4259B7A7F00C269AA /* RemindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindView.swift; sourceTree = "<group>"; };
 		AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewModel.swift; sourceTree = "<group>"; };
 		AB97360E259BA55500C269AA /* DropdownItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemProtocol.swift; sourceTree = "<group>"; };
@@ -102,11 +106,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB8A6A2F259F5BB6007380B2 /* CreateChallengeViewModel+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */,
+				AB8A6A24259F58C5007380B2 /* Ext_CreateChallengeViewModelHelpers.swift */,
+				AB8A6A39259F5C8B007380B2 /* Ext_CreateChallengeExerciseOptionsEnums.swift */,
+			);
+			path = "CreateChallengeViewModel+Extensions";
+			sourceTree = "<group>";
+		};
 		AB9735F5259B933A00C269AA /* LandingView+Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				ABA57F4A259A77B9006D378C /* LandingView.swift */,
-				AB9735CD259B6E5D00C269AA /* ExtLandingView.swift */,
+				AB9735CD259B6E5D00C269AA /* Ext_LandingView.swift */,
 			);
 			path = "LandingView+Extensions";
 			sourceTree = "<group>";
@@ -204,7 +218,7 @@
 		ABA57F90259A87F9006D378C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AB973605259BA44A00C269AA /* CreateChallengeViewModel.swift */,
+				AB8A6A2F259F5BB6007380B2 /* CreateChallengeViewModel+Extensions */,
 				AB97360D259BA54B00C269AA /* Protocols */,
 			);
 			path = ViewModel;
@@ -398,11 +412,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8A6A25259F58C5007380B2 /* Ext_CreateChallengeViewModelHelpers.swift in Sources */,
 				ABA57F86259A7811006D378C /* LibModifiers.swift in Sources */,
 				ABF38794259AB8E4007BD544 /* ModifierStructHelpers.swift in Sources */,
 				AB9735C0259B6ADA00C269AA /* DropDownSubView.swift in Sources */,
 				AB97360F259BA55500C269AA /* DropdownItemProtocol.swift in Sources */,
-				AB9735CE259B6E5D00C269AA /* ExtLandingView.swift in Sources */,
+				AB8A6A3A259F5C8B007380B2 /* Ext_CreateChallengeExerciseOptionsEnums.swift in Sources */,
+				AB9735CE259B6E5D00C269AA /* Ext_LandingView.swift in Sources */,
 				ABA57F81259A77F3006D378C /* LibTools2.swift in Sources */,
 				ABAAF0DD259D37B10047909F /* UserService.swift in Sources */,
 				ABA57F4B259A77B9006D378C /* LandingView.swift in Sources */,
