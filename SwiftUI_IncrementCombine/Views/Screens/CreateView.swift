@@ -6,30 +6,6 @@ struct CreateView: View {
     /// ™ It is a `@StateObject` becuase this view owns it when it creates it
     @StateObject var createChallengeVM = CreateChallengeViewModel()
     //™•••••••••••••••••••••••••••••••••••«
-    var dropdownListForEachComponent: some View {
-        //∆..........
-        ForEach(createChallengeVM.dropdowns.indices, id: \.self) { index in
-            //∆..........
-            DropDownSubView(createChallengeVM: $createChallengeVM.dropdowns[index])
-        }
-    }
-    
-    /// ™ actionSheetSelected ----------
-    var actionSheetSelected: ActionSheet {
-        //∆..........
-        ActionSheet(
-            title: Text("Select"),
-            buttons: createChallengeVM.displayOption.indices.map { index in
-                //∆..........
-                let option = createChallengeVM.displayOption[index]
-                //∆..........
-                return .default(Text(option.formatted)) {
-                    ///∆ Select `option` at `index`
-                    createChallengeVM.send(action: .selectOption(index: index))
-                }
-            })
-    }
-    /// ∆ END OF: actionSheetSelected ----
     ///™«««««««««««««««««««««««««««««««««««
     
     // MARK: -∆ Initializer
@@ -54,7 +30,7 @@ struct CreateView: View {
                 ///ººº..................................•••
                 
                 // MARK: -∆  dropdownListForEachComponent  '''''''''''''''''''''
-                dropdownListForEachComponent
+                dropdownListGroupComponent
                 
                 // MARK: -∆  Button(Next) To Dismiss View  '''''''''''''''''''''
                 
@@ -79,20 +55,6 @@ struct CreateView: View {
                 //∆ HANGER ™👕™ .................
             })
             // ∆ END OF: VStack
-            // MARK: - actionSheet
-            ///™™|............................................
-            .actionSheet(
-                isPresented: Binding<Bool>(
-                    get: {
-                        //∆..........
-                        createChallengeVM.selectedDropdown
-                        //∆..........
-                    },
-                    set: { _ in })
-            ) {
-                actionSheetSelected
-            }
-            ///™™|............................................
             .navigationBarTitle("Create")
             .navigationBarBackButtonHidden(true)
             //∆ HANGER ™👕™ .................
@@ -107,6 +69,30 @@ struct CreateView: View {
     
 }
 // MARK: END OF: CreateView
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+// MARK: -∆  EXTENSION OF: [( CreateView )] •••••••••
+
+extension CreateView {
+    
+    // MARK: @------- [Computed some-View Properties] -------
+    
+    /// ™ dropdownListGroupComponent ----------
+    var dropdownListGroupComponent: some View {
+        //∆..........
+        Group {
+            DropDownSubView(createChallengeVM: $createChallengeVM.exerciseDropdown)
+            DropDownSubView(createChallengeVM: $createChallengeVM.startAmountDropdown)
+            DropDownSubView(createChallengeVM: $createChallengeVM.increaseDropdown)
+            DropDownSubView(createChallengeVM: $createChallengeVM.lengthDropdown)
+        }
+        // ∆ END OF: Group
+    }
+    /// ∆ END OF: dropdownListGroupComponent ----
+}
+// MARK: END OF: CreateView
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
 /// ™•••••••••••••••••••••••••••• ([ Preview ]) ••••••••••••••••••••••••••••™
 

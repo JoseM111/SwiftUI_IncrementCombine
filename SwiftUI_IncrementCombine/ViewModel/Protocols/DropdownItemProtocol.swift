@@ -7,6 +7,7 @@ protocol DropdownItemProtocol {
     var headerTitle: String { get }
     var dropdownTitle: String { get }
     var isSelected: Bool { get set }
+    var selectedOption: DropdownOption { get set }
     ///™«««««««««««««««««««««««««««««««««««
 }
 // MARK: END OF PROTOCOL: DropdownOption
@@ -29,7 +30,6 @@ struct DropdownOption {
     ///™«««««««««««««««««««««««««««««««««««
     let type: DropdownOptionType
     let formatted: String
-    var isSelected: Bool
     ///™«««««««««««««««««««««««««««««««««««
     
     // MARK: - ™Child-Enum™
