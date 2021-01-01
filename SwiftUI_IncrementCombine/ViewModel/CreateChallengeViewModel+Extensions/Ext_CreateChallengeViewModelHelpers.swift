@@ -28,15 +28,20 @@ extension CreateChallengeViewModelHelpers {
         switch action {
         //∆..........
         case .createChallenge:
-            currentUserId().flatMap { userId -> AnyPublisher<Void, Error> in
+            //∆..........
+            isLoading = true
+            //∆..........
+            currentUserId().flatMap { userId -> AnyPublisher<Void, IncrementError> in
                 //∆..........
                 return self.createChallenge(userId: userId)
             }
             .sink { completion in
                 //∆..........
+                self.isLoading = false
+                //∆..........
                 switch completion {
                 //∆..........
-                case let .failure(error): print("DEBUG: \(error.localizedDescription)")
+                case let .failure(error): self.error = error
                 case .finished: print("DEBUG: Completed successfully")
                 //∆..........
                 }
@@ -52,13 +57,16 @@ extension CreateChallengeViewModelHelpers {
     /// ∆ END OF: send ---
     
     /// ™ createChallenge ----------
-    func createChallenge(userId: UserId) -> AnyPublisher<Void, Error> {
+    func createChallenge(userId: UserId) -> AnyPublisher<Void, IncrementError> {
         //∆..........
         guard let exercise = exerciseDropdown.text,
-        let startAmount = startAmountDropdown.number,
-        let increase = increaseDropdown.number,
-        let length = lengthDropdown.number
-        else { return Fail(error: NSError()).eraseToAnyPublisher() }
+              let startAmount = startAmountDropdown.number,
+              let increase = increaseDropdown.number,
+              let length = lengthDropdown.number
+        else {
+            return Fail(error: .default(description: "DEBUG: Parsing error..."))
+                .eraseToAnyPublisher()
+        }
 
         let challenge: ChallengeModel = .init(
             exercise: exercise, startAmount: startAmount,
@@ -72,19 +80,26 @@ extension CreateChallengeViewModelHelpers {
     /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
     
     /// ™ currentId(Combine) ----------
-    func currentUserId() -> AnyPublisher<UserId, Error> {
+    func currentUserId() -> AnyPublisher<UserId, IncrementError> {
         //∆..........
+        /// ™ Testing the custom alert error
+//        let customErrorCombineAnyPublisher: AnyPublisher<UserId, IncrementError> =
+//            Fail(error: .auth(description: "FirebaseAuth error..."))
+//            .eraseToAnyPublisher()
+            
         print("DEBUG: Retrieving user ID...")
         
         return userService.currentUser()
-            .flatMap { user -> AnyPublisher<UserId, Error> in
-                //∆..........
+            .flatMap { user -> AnyPublisher<UserId, IncrementError> in
+                ///∆..........Error Alert test
+//                return customErrorCombineAnyPublisher
+                
                 if let userId = user?.uid {
                     //∆..........
                     print("DEBUG: User is logged in...")
-                    
+
                     return Just(userId)
-                        .setFailureType(to: Error.self)
+                        .setFailureType(to: IncrementError.self)
                         .eraseToAnyPublisher()
                 } else {
                     //∆..........

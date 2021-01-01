@@ -13,6 +13,8 @@ final class CreateChallengeViewModel: ObservableObject {
     @Published var startAmountDropdown: ChallengePartViewModel = .init(type: .startAmount)
     @Published var increaseDropdown: ChallengePartViewModel = .init(type: .increase)
     @Published var lengthDropdown: ChallengePartViewModel = .init(type: .length)
+    @Published var error: IncrementError?
+    @Published var isLoading: Bool = false
     //™•••••••••••••••••••••••••••••••••••«
     let userService: UserServiceProtocol
     let challengeService: ChallengeServiceProtocol
