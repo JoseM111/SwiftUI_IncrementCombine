@@ -21,6 +21,51 @@ struct CreateView: View {
     var body: some View {
         
         //.............................
+        ZStack {
+            
+            if createChallengeVM.isLoading {
+                //∆..........
+                ProgressView()
+            } else { mainContentView }
+        }
+        // MARK: ||END__PARENT-ZStack||
+        // MARK: - alert
+        ///™™|............................................
+        .alert(isPresented: Binding<Bool>
+                .constant($createChallengeVM.error.wrappedValue != nil),
+               content: {
+                //∆..........
+                Alert(title: Text("Error!"),
+                      message: Text(
+                        $createChallengeVM.error.wrappedValue?.localizedDescription ?? ""),
+                      dismissButton: .default(Text("OK"), action: {
+                        //∆..........
+                        createChallengeVM.error = nil
+                      }))
+               })
+        ///™™|............................................
+        .navigationBarTitle("Create")
+        .navigationBarBackButtonHidden(true)
+        .modifier(VStackImageFullScreenModifier(imageName: "increment-app-bg"))
+        //.............................
+        
+    }
+    // MARK: |||END OF: body|||
+    
+    
+}
+// MARK: END OF: CreateView
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+// MARK: -∆  EXTENSION OF: [( CreateView )] •••••••••
+
+extension CreateView {
+    
+    // MARK: @------- [Computed some-View Properties] -------
+    
+    /// ™ mainContentView ----------
+    var mainContentView: some View {
+        //∆..........
         ScrollView {
             
             VStack(alignment: .center, spacing: nil, content: {
@@ -55,27 +100,11 @@ struct CreateView: View {
                 //∆ HANGER ™👕™ .................
             })
             // ∆ END OF: VStack
-            .navigationBarTitle("Create")
-            .navigationBarBackButtonHidden(true)
             //∆ HANGER ™👕™ .................
         }
-        // MARK: ||END__PARENT-ScrollView||
-        .modifier(VStackImageFullScreenModifier(imageName: "increment-app-bg"))
-        //.............................
-        
+        // ∆ END OF: ScrollView
     }
-    // MARK: |||END OF: body|||
-    
-    
-}
-// MARK: END OF: CreateView
-
-/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-// MARK: -∆  EXTENSION OF: [( CreateView )] •••••••••
-
-extension CreateView {
-    
-    // MARK: @------- [Computed some-View Properties] -------
+    /// ∆ END OF: mainContentView ----
     
     /// ™ dropdownListGroupComponent ----------
     var dropdownListGroupComponent: some View {
