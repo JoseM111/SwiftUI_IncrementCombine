@@ -1,6 +1,10 @@
 # SwiftUI_IncrementCombine
 SwiftUI workout app, using MVVM &amp; Combine
 
-<img width="72" alt="image1" src="https://user-images.githubusercontent.com/44812411/103436973-e5ebce00-4c21-11eb-88ef-c9bf10399a07.png">
 
-<img width="72" alt="image2" src="https://user-images.githubusercontent.com/44812411/103436974-e6846480-4c21-11eb-8765-79eebcd98b3b.png">
+<img width="180" alt="image2" src="https://user-images.githubusercontent.com/44812411/103437013-74f8e600-4c22-11eb-9428-b1153d5ccb73.png"> <img width="180" alt="image1" src="https://user-images.githubusercontent.com/44812411/103437014-76c2a980-4c22-11eb-9314-897a67dca9fe.png">
+
+
+
+
+
