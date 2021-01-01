@@ -1,6 +1,10 @@
 import SwiftUI
+import Combine
+import FirebaseAuth
 
-import SwiftUI
+//∆.....................................................
+typealias UserId = String
+//∆.....................................................
 
 final class CreateChallengeViewModel: ObservableObject {
     // MARK: - ™PROPERTIES™
@@ -13,6 +17,9 @@ final class CreateChallengeViewModel: ObservableObject {
         .init(type: .length)
         //∆..........
     ]
+    
+    private let userService: UserServiceProtocol
+    private var cancellables: [AnyCancellable] = []
     ///™«««««««««««««««««««««««««««««««««««
     
     // MARK: -∆  Computed-Property  '''''''''''''''''''''
@@ -40,17 +47,26 @@ final class CreateChallengeViewModel: ObservableObject {
     /// ∆ END OF: displayOption
     
     /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-
+    
     /// ™ Action ----------
     enum Action {
         // MARK: - ™CASES™
         ///™«««««««««««««««««««««««««««««««««««
         case selectOption(index: Int)
+        case createChallenge
         ///™«««««««««««««««««««««««««««««««««««
     }
     // MARK: END OF ENUM: Action
     
     /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+    
+    // MARK: -∆ Initializer
+    ///∆.................................
+    init(userService: UserServiceProtocol = UserService()) {
+        //∆..........
+        self.userService = userService
+    }
+    ///∆.................................
     
     ///∆ ........... Helper Methods ...........
     
@@ -68,6 +84,24 @@ final class CreateChallengeViewModel: ObservableObject {
             dropdowns[selected].options[index].isSelected = true
             // Sets back to false: Clears the drop down
             clearSelectedDropdown()
+        //∆..........
+        case .createChallenge: currentUserId().sink { completion in
+            //∆..........
+            switch completion {
+            //∆..........
+            case .finished: print("Completed successfully")
+            //∆..........
+            case let .failure(error): print("DEBUG: \(error.localizedDescription)")
+            //∆..........
+            }
+            //∆..........
+            
+        } receiveValue: { userId in
+            //∆..........
+            print("DEBUG: Retrived user id: \(userId)")
+            //∆..........
+        }.store(in: &cancellables)
+        
         }
         // ∆ END OF: switch
     }
@@ -93,6 +127,36 @@ final class CreateChallengeViewModel: ObservableObject {
         dropdowns[selected].isSelected = false
     }
     /// ∆ END OF: clearSelectedDropdown ---
+    
+    /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+    
+    /// ™ currentId(Combine) ----------
+    func currentUserId() -> AnyPublisher<UserId, Error> {
+        //∆..........
+        print("DEBUG: Retrieving user ID...")
+        
+        return userService.currentUser()
+            .flatMap { user -> AnyPublisher<UserId, Error> in
+                //∆..........
+                if let userId = user?.uid {
+                    //∆..........
+                    print("DEBUG: User is logged in...")
+                    
+                    return Just(userId)
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                } else {
+                    //∆..........
+                    print("DEBUG: User is being logged in anonymously...")
+
+                    return self.userService
+                        .signInAnonymously().map { $0.uid }
+                        .eraseToAnyPublisher()
+                }
+                // ∆ END OF: if-let
+            }.eraseToAnyPublisher()
+    }
+    /// ∆ END OF: currentId ---
     
 }
 // MARK: END OF: CreateChallengeViewModel
@@ -134,21 +198,21 @@ extension CreateChallengeViewModel {
         /// ∆ END OF: dropdownTitle
         
         /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-
+        
         // MARK: -∆ Initializer Injecting our ChallengePartType
         ///∆.................................
         init(type: ChallengePartType) {
             //∆..........
             switch type {
-                //∆..........
+            //∆..........
             case .exercise: self.options = ExcerciseOption.allCases.map { $0.toDropdownOption }
-                //∆..........
+            //∆..........
             case .startAmount: self.options = StartAmount.allCases.map { $0.toDropdownOption }
-                //∆..........
+            //∆..........
             case .increase: self.options = IncreaseAmount.allCases.map { $0.toDropdownOption }
-                //∆..........
+            //∆..........
             case .length: self.options = LengthAmount.allCases.map { $0.toDropdownOption }
-                //∆..........
+            //∆..........
             }
             
             self.type = type
@@ -168,7 +232,7 @@ extension CreateChallengeViewModel {
         // MARK: END OF ENUM: ChallengePartType
         
         /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-
+        
         /// ™ ExcerciseOption ----------
         enum ExcerciseOption: String, CaseIterable, DropdownOptionProtocol {
             // MARK: - ™CASES™
