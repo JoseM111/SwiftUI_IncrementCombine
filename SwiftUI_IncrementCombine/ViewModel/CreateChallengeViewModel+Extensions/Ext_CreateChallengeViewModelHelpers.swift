@@ -27,27 +27,47 @@ extension CreateChallengeViewModelHelpers {
         //∆..........
         switch action {
         //∆..........
-        case .createChallenge: currentUserId().sink { completion in
-            //∆..........
-            switch completion {
-            //∆..........
-            case .finished: print("Completed successfully")
-            //∆..........
-            case let .failure(error): print("DEBUG: \(error.localizedDescription)")
-            //∆..........
+        case .createChallenge:
+            currentUserId().flatMap { userId -> AnyPublisher<Void, Error> in
+                //∆..........
+                return self.createChallenge(userId: userId)
             }
-            //∆..........
-            
-        } receiveValue: { userId in
-            //∆..........
-            print("DEBUG: Retrived user id: \(userId)")
-            //∆..........
-        }.store(in: &cancellables)
-        
+            .sink { completion in
+                //∆..........
+                switch completion {
+                //∆..........
+                case let .failure(error): print("DEBUG: \(error.localizedDescription)")
+                case .finished: print("DEBUG: Completed successfully")
+                //∆..........
+                }
+                //∆..........
+            } receiveValue: { _ in
+                //∆..........
+                print("DEBUG: Success creating challenge!..")
+                //∆..........
+            }.store(in: &cancellables)
         }
         // ∆ END OF: switch
     }
     /// ∆ END OF: send ---
+    
+    /// ™ createChallenge ----------
+    func createChallenge(userId: UserId) -> AnyPublisher<Void, Error> {
+        //∆..........
+        guard let exercise = exerciseDropdown.text,
+        let startAmount = startAmountDropdown.number,
+        let increase = increaseDropdown.number,
+        let length = lengthDropdown.number
+        else { return Fail(error: NSError()).eraseToAnyPublisher() }
+
+        let challenge: ChallengeModel = .init(
+            exercise: exercise, startAmount: startAmount,
+            increase: increase, length: length,
+            userId: userId, startDate: Date())
+        
+        return challengeService.create(challenge: challenge).eraseToAnyPublisher()
+    }
+    /// ∆ END OF: createChallenge ---
     
     /// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
     

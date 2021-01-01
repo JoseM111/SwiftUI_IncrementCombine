@@ -15,6 +15,7 @@ final class CreateChallengeViewModel: ObservableObject {
     @Published var lengthDropdown: ChallengePartViewModel = .init(type: .length)
     //™•••••••••••••••••••••••••••••••••••«
     let userService: UserServiceProtocol
+    let challengeService: ChallengeServiceProtocol
     var cancellables: [AnyCancellable] = []
     ///™«««««««««««««««««««««««««««««««««««
     
@@ -22,9 +23,11 @@ final class CreateChallengeViewModel: ObservableObject {
         
     // MARK: -∆ Initializer
     ///∆.................................
-    init(userService: UserServiceProtocol = UserService()) {
+    init(userService: UserServiceProtocol = UserService(),
+         challengeService: ChallengeServiceProtocol = ChallengeService()) {
         //∆..........
         self.userService = userService
+        self.challengeService = challengeService
     }
     ///∆.................................
 }

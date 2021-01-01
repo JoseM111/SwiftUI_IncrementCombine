@@ -2,9 +2,10 @@ import SwiftUI
 
 // MARK: -∆  EXTENSION OF: [( ChallengePartViewModel )] •••••••••
 
-typealias CreateChallengeExerciseOptionsEnums = CreateChallengeViewModel
-// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-extension CreateChallengeExerciseOptionsEnums {
+typealias CreateChallengeExerciseOptions = CreateChallengeViewModel
+//∆.....................................................
+
+extension CreateChallengeExerciseOptions.ChallengePartViewModel {
     
     /// ™ ExcerciseOption ----------
     enum ExcerciseOption: String, CaseIterable, DropdownOptionProtocol {
@@ -84,6 +85,36 @@ extension CreateChallengeExerciseOptionsEnums {
     // MARK: END OF ENUM: LengthAmount
     
     
+}
+// MARK: END OF: ChallengePartViewModel
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+// MARK: -∆  EXTENSION OF: [( ChallengePartViewModel )] •••••••••
+
+extension CreateChallengeExerciseOptions.ChallengePartViewModel {
+    
+    /// ™ text ----------
+    var text: String? {
+        //∆..........
+        if case let .text(text) = selectedOption.type {
+            return text
+        }
+        
+        return nil
+    }
+    /// ∆ END OF: text ----
+    
+    /// ™ number ----------
+    var number: Int? {
+        //∆..........
+        if case let .number(number) = selectedOption.type {
+            return number
+        }
+        
+        return nil
+    }
+    /// ∆ END OF: number ----
 }
 // MARK: END OF: ChallengePartViewModel
 
