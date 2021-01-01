@@ -9,7 +9,6 @@ struct DropDownSubView<T: DropdownItemProtocol>: View {
     let whiteOpacity = Color.white.opacity(0.6)
     ///™«««««««««««««««««««««««««««««««««««
     
-    
     var body: some View {
         
         //.............................
@@ -60,6 +59,13 @@ struct DropDownSubView<T: DropdownItemProtocol>: View {
             
         })
         // MARK: ||END__PARENT-VSTACK||
+        // MARK: - actionSheet
+        ///™™|............................................
+        .actionSheet(isPresented: $createChallengeVM.isSelected) {
+            //∆..........
+            actionSheetSelectedComponent
+        }
+        ///™™|............................................
         //.............................
         
     }
@@ -68,6 +74,32 @@ struct DropDownSubView<T: DropdownItemProtocol>: View {
     
 }
 // MARK: END OF: DropDownSubView
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+// MARK: -∆  EXTENSION OF: [( DropDownSubView )] •••••••••
+
+extension DropDownSubView {
+    
+    // MARK: @------- [Computed some-View Properties] -------
+    
+    /// ™ actionSheetSelected ----------
+    var actionSheetSelectedComponent: ActionSheet {
+        //∆..........
+        ActionSheet(
+            title: Text("Select"),
+            buttons: createChallengeVM.options.map { option in
+                //∆..........
+                return .default(Text(option.formatted)) {
+                    ///∆ Select `option` at `index`
+                    createChallengeVM.selectedOption = option
+                }
+            })
+    }
+    /// ∆ END OF: actionSheetSelected ----
+}
+// MARK: END OF: DropDownSubView
+
+/// @•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 /// ™•••••••••••••••••••••••••••• ([ Preview ]) ••••••••••••••••••••••••••••™
 
 // MARK: - Preview
